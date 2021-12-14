@@ -21,24 +21,28 @@ def divide(first, second):
     else:
         return first / second
 
+def calculator():
+    continues = True
+    operations = {
+        '+': add,
+        '-': subtract,
+        '*': multiply,
+        '/': divide
+    }
+    first_number = float(input("Enter your first number "))
+    prev_result = first_number
+    while continues:
+        print_operations(operations)
+        operation = input("Pick an operation ")
+        second_number = float(input("Enter your second number "))
+        calculation_function = operations[operation]
+        result = calculation_function(prev_result, second_number)
+        print(f"{prev_result} " + operation + f" {second_number} = " + str(result))
+        prev_result = result
 
-continues = True
-operations = {
-    '+': add,
-    '-': subtract,
-    '*': multiply,
-    '/': divide
-}
+        decision = input("press 'y' if you want to continue or 'n' to restart calculator")
+        if decision == 'n':
+            continues = False
+            calculator()
 
-while continues:
-    first_number = int(input("Enter your first number "))
-    print_operations(operations)
-    operation = input("Pick an operation ")
-    second_number = int(input("Enter your second number "))
-    calculation_function = operations[operation]
-    result = calculation_function(first_number, second_number)
-    print(f"{first_number} " + operation + f" {second_number} = " + str(result))
-
-    decision = input("press 'y' if you want to continue ")
-    if decision != 'y':
-        continues = False
+calculator()
